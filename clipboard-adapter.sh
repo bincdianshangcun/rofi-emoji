@@ -76,16 +76,19 @@ determine_tool() {
   fi
 }
 
-tool=$(determine_tool)
-if [ -z "$tool" ]; then
-  show_error "Could not find a supported clipboard tool installed. Install xsel."
-  exit 1
-fi
+# tool=$(determine_tool)
+# if [ -z "$tool" ]; then
+#   show_error "Could not find a supported clipboard tool installed. Install xsel."
+#   exit 1
+# fi
+
+cache_file="$HOME/.cache/rofi.qmenu.txt"
 
 case "$1" in
   copy)
     shift
-    printf "%s" "$*" | handle_copy "$tool"
+    # printf "%s" "$*" | handle_copy "$tool"
+    printf "%s" "$*" > $cache_file
     ;;
   *)
     show_error "$0: Unknown command \"$1\""
